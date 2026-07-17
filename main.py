@@ -8,7 +8,7 @@ from dna_tools.translation import translate_dna
 from dna_tools.orf import find_orf
 from dna_tools.fasta import read_fasta
 from dna_tools.multi_gc import gc_for_all_sequences
-
+from dna_tools.motif import find_motif
 
 
 
@@ -40,6 +40,7 @@ def main():
     print("4. RNA → Protein Transcription")
     print("5. DNA → Find ORF")
     print("6. GC Content from FASTA")
+    print("7. Find Motif")
 
     choice = input("\nChoose an option (1-4): ")
 
@@ -86,7 +87,21 @@ def main():
             print()
 
             for name, gc in results.items():
-                print(f"{name} -> {gc:.2f}%")
+                        print(f"{name} -> {gc:.2f}%")
+        elif choice == "7":
+
+            motif = input("Enter motif: ")
+
+            positions = find_motif(sequence, motif)
+
+            if positions:
+
+                print("\nMotif found at positions:")
+
+                print(*positions)
+
+            else:
+                print("\nMotif not found.")
 
         else:
             print("Invalid option.")
