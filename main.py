@@ -9,7 +9,9 @@ from dna_tools.orf import find_orf
 from dna_tools.fasta import read_fasta
 from dna_tools.multi_gc import gc_for_all_sequences
 from dna_tools.motif import find_motif
-
+from dna_tools.codon_counter import count_codons
+from dna_tools.sequence_length import calculate_sequence_lengths
+from dna_tools.fasta import read_fasta
 
 
 def nucleotide_counter(sequence):
@@ -41,6 +43,8 @@ def main():
     print("5. DNA → Find ORF")
     print("6. GC Content from FASTA")
     print("7. Find Motif")
+    print("8. Count Codons")
+    print("9. Calculate Sequence Lengths")
 
     choice = input("\nChoose an option (1-4): ")
 
@@ -102,7 +106,32 @@ def main():
 
             else:
                 print("\nMotif not found.")
+        elif choice == "8":
 
+            codons = count_codons(sequence)
+
+            print("\nCodon Counts")
+
+            for codon, count in codons.items():
+                print(f"{codon}: {count}")
+                
+        elif choice == "9":
+
+            file_path = input("Enter FASTA file path: ")
+
+            sequences = read_fasta(file_path)
+
+            lengths = calculate_sequence_lengths(sequences)
+
+            print("\nSequence Lengths")
+
+            for header, length in lengths.items():
+                print(f"{header}: {length} bp")   
+        
+        
+        
+        
+        
         else:
             print("Invalid option.")
 
