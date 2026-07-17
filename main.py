@@ -5,6 +5,9 @@ from dna_tools.complement import complement
 from dna_tools.reverse import reverse_sequence
 from dna_tools.transcription import transcribe_dna
 from dna_tools.translation import translate_dna
+from dna_tools.orf import find_orf
+
+
 
 
 def nucleotide_counter(sequence):
@@ -32,7 +35,8 @@ def main():
     print("1. Count Nucleotides")
     print("2. Reverse Complement")
     print("3. DNA → RNA Transcription")
-    print("4. DNA → Protein Transcription")
+    print("4. RNA → Protein Transcription")
+    print("5. DNA → Find ORF")
 
     choice = input("\nChoose an option (1-4): ")
 
@@ -58,6 +62,16 @@ def main():
 
             print("\nProtein Sequence:")
             print(protein)
+        
+        elif choice == "5":
+
+            orf = find_orf(sequence)
+
+            if orf:
+                print("\nOpen Reading Frame:")
+                print(orf)
+            else:
+                print("\nNo ORF found.")
 
         else:
             print("Invalid option.")
