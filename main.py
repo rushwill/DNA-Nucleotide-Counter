@@ -6,6 +6,8 @@ from dna_tools.reverse import reverse_sequence
 from dna_tools.transcription import transcribe_dna
 from dna_tools.translation import translate_dna
 from dna_tools.orf import find_orf
+from dna_tools.fasta import read_fasta
+from dna_tools.multi_gc import gc_for_all_sequences
 
 
 
@@ -37,6 +39,7 @@ def main():
     print("3. DNA → RNA Transcription")
     print("4. RNA → Protein Transcription")
     print("5. DNA → Find ORF")
+    print("6. GC Content from FASTA")
 
     choice = input("\nChoose an option (1-4): ")
 
@@ -72,6 +75,18 @@ def main():
                 print(orf)
             else:
                 print("\nNo ORF found.")
+        elif choice == "6":
+
+            path = input("Enter FASTA file path: ")
+
+            sequences = read_fasta(path)
+
+            results = gc_for_all_sequences(sequences)
+
+            print()
+
+            for name, gc in results.items():
+                print(f"{name} -> {gc:.2f}%")
 
         else:
             print("Invalid option.")
